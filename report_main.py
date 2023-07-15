@@ -25,11 +25,17 @@ def myInit():
 
 def mySetLight():
     glEnable(GL_LIGHT0)
-    glEnable(GL_LIGHTING)
+
 
 def myDisplay():
-    glClear(GL_COLOR_BUFFER_BIT)
-    
+    mtrl_specular = [1.0, 1.0, 1.0, 1.0]
+    mtrl_shininess = [50.0]
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+    glEnable(GL_DEPTH_TEST)
+    glEnable(GL_LIGHTING)
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mtrl_specular)
+    glMaterialfv(GL_FRONT, GL_SHININESS, mtrl_shininess)
 
     glTranslated(0.0, 0.0, 0.0)
     glPushMatrix()

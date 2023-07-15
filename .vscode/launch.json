@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/ichimura riku/Documents/金沢工業大学/授業科目/三年次前学期/コンピュータグラフィックス/w01/cg2023/report",
+      "program": "c:/Users/ichimura riku/Documents/金沢工業大学/授業科目/三年次前学期/コンピュータグラフィックス/w01/cg2023/report/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
