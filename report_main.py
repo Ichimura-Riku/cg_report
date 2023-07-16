@@ -31,6 +31,116 @@ def mySetLight():
     glEnable(GL_LIGHT0)
     glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
 
+def robotWire():
+    glTranslated(0.0, 0.0, 0.0)
+    多分胴体
+    glPushMatrix()
+    glScaled(3.0, 4.0, 1.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+
+    glPushMatrix()
+    右側の腕
+    glPushMatrix()
+    glTranslated(2.0, 2.0, 0.0)
+    glPushMatrix()
+    glScaled(0.0, 0.0, 0.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+
+    glRotated(shoulder, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+    glScaled(1.0, -2.0, 1.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+
+    glTranslated(0.0, -1.0, 0.0)
+    glRotated(elbow, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+    glScaled(1.0, 2.0, 1.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+
+    glPopMatrix()
+
+
+    左側の腕
+
+    glPushMatrix()
+    glTranslated(-2.0, 2.0, 0.0)
+    glPushMatrix()
+    glScaled(0.0, 0.0, 0.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+    glRotated(-shoulder, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+    glScaled(1.0, -2.0, 1.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+    glTranslated(0.0, -1.0, 0.0)
+    glRotated(-elbow + 180, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+    glScaled(1.0, 2.0, 1.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+    glPopMatrix()
+
+
+
+    glPushMatrix()
+    glTranslated(0.0, 3.0, 0.0)
+    glPushMatrix()
+    glutWireSphere(1.0, 10, 10)
+    glPopMatrix()
+    glPopMatrix()
+
+    glPushMatrix()
+    glTranslated(1.0, -2.0, 0.0)
+    glPushMatrix()
+    glScaled(0.0, 0.0, 0.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+    glRotated(-thigh - 15, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.5, 0.0)
+    glPushMatrix()
+    glScaled(1.0, -3.0, 1.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+    glTranslated(0.0, -1.5, 0.0)
+    glRotated(-shin + 15, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+    glScaled(1.0, 2.0, 1.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+    glPopMatrix()
+
+    glPushMatrix()
+    glTranslated(-1.0, -2.0, 0.0)
+    glPushMatrix()
+    glScaled(0.0, 0.0, 0.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+    glRotated(thigh - 15, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.5, 0.0)
+    glPushMatrix()
+    glScaled(1.0, -3.0, 1.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+    glTranslated(0.0, -1.5, 0.0)
+    glRotated(shin + 15, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+    glScaled(1.0, 2.0, 1.0)
+    glutWireCube(1.0)
+    glPopMatrix()
+    glPopMatrix()
+
+    glPopMatrix()
 
 def robotBody():
 
@@ -295,7 +405,231 @@ def robotLeftArm():
     glPopMatrix()
     glPopMatrix()
 
+def robotRightLeg():
+    x =1.0 / 2
+    y = -2.0 / 2
+    z = 1.0 / 2
+    glPushMatrix()
 
+
+    glRotated(gPitch, 1, 0, 0)
+    glRotated(gYaw, 0, 0, 1)
+    glTranslated(-1.0, -2.0, 0.0)
+    glRotated(thigh - 15, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+
+    glBegin(GL_QUADS)
+    glNormal3d(0, 0, -0.5)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(-x, y, -z)
+
+    glNormal3d(0, 0, 0.5)
+    glVertex3d(-x, y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(1, 0, 0)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, -y, -z)
+
+    glNormal3d(-1, 0, 0)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(-x, y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(0, 1, 0)
+    glVertex3d(-x, y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, y, z)
+    glVertex3d(-x, y, z)
+
+    glNormal3d(0, -1, 0)
+    glVertex3d(-x, -y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(-x, -y, -z)
+
+    glEnd()
+
+
+    glPopMatrix()
+
+    # glRotated(gPitch, 1, 0, 0)
+    # glRotated(gYaw, 0, 0, 1)
+    glTranslated(0.0, -1.0, 0.0)
+    glRotated(shin + 15, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+
+    glPushMatrix()
+    glBegin(GL_QUADS)
+
+
+    glNormal3d(0, 0, -0.5)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(-x, y, -z)
+
+    glNormal3d(0, 0, 0.5)
+    glVertex3d(-x, y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(1, 0, 0)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, -y, -z)
+
+    glNormal3d(-1, 0, 0)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(-x, y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(0, 1, 0)
+    glVertex3d(-x, y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, y, z)
+    glVertex3d(-x, y, z)
+
+    glNormal3d(0, -1, 0)
+    glVertex3d(-x, -y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(-x, -y, -z)
+
+    glEnd()
+    glPopMatrix()
+    glPopMatrix()
+
+def robotLeftLeg():
+    x =1.0 / 2
+    y = -2.0 / 2
+    z = 1.0 / 2
+    glPushMatrix()
+
+
+    glRotated(gPitch, 1, 0, 0)
+    glRotated(gYaw, 0, 0, 1)
+    glTranslated(1.0, -2.0, 0.0)
+    glRotated(-thigh - 15, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+
+    glBegin(GL_QUADS)
+    glNormal3d(0, 0, -0.5)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(-x, y, -z)
+
+    glNormal3d(0, 0, 0.5)
+    glVertex3d(-x, y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(1, 0, 0)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, -y, -z)
+
+    glNormal3d(-1, 0, 0)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(-x, y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(0, 1, 0)
+    glVertex3d(-x, y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, y, z)
+    glVertex3d(-x, y, z)
+
+    glNormal3d(0, -1, 0)
+    glVertex3d(-x, -y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(-x, -y, -z)
+
+    glEnd()
+
+
+    glPopMatrix()
+
+    # glRotated(gPitch, 1, 0, 0)
+    # glRotated(gYaw, 0, 0, 1)
+    glTranslated(0.0, -1.0, 0.0)
+    glRotated(-shin + 15, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+
+    glPushMatrix()
+    glBegin(GL_QUADS)
+
+
+    glNormal3d(0, 0, -0.5)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(-x, y, -z)
+
+    glNormal3d(0, 0, 0.5)
+    glVertex3d(-x, y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(1, 0, 0)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, -y, -z)
+
+    glNormal3d(-1, 0, 0)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(-x, y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(0, 1, 0)
+    glVertex3d(-x, y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, y, z)
+    glVertex3d(-x, y, z)
+
+    glNormal3d(0, -1, 0)
+    glVertex3d(-x, -y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(-x, -y, -z)
+
+    glEnd()
+    glPopMatrix()
+    glPopMatrix()
+
+def robotHead():
+    glPushMatrix()
+    glTranslated(0, 3.0, 0)
+    glutSolidSphere(1, 20, 16)
+    glPopMatrix()
+
+def robotDisplay():
+    robotBody()
+    robotRightArm()
+    robotLeftArm()
+    robotRightLeg()
+    robotLeftLeg()
+    robotHead()
 
 def myDisplay():
 
@@ -319,120 +653,11 @@ def myDisplay():
     glMaterialf(GL_BACK, GL_SHININESS, 60)
 
     # 図形描写
-    robotBody()
-    robotRightArm()
-    robotLeftArm()
-
-
-    glTranslated(0.0, 0.0, 0.0)
-    # 多分胴体
-    # glPushMatrix()
-    # glScaled(3.0, 4.0, 1.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-
-    # glPushMatrix()
-    # 右側の腕
-    # glPushMatrix()
-    # glTranslated(2.0, 2.0, 0.0)
-    # glPushMatrix()
-    # glScaled(0.0, 0.0, 0.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-
-    # glRotated(shoulder, 1.0, 0.0, 0.0)
-    # glTranslated(0.0, -1.0, 0.0)
-    # glPushMatrix()
-    # glScaled(1.0, -2.0, 1.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-
-    # glTranslated(0.0, -1.0, 0.0)
-    # glRotated(elbow, 1.0, 0.0, 0.0)
-    # glTranslated(0.0, -1.0, 0.0)
-    # glPushMatrix()
-    # glScaled(1.0, 2.0, 1.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-
-    # glPopMatrix()
-
-
-    # 左側の腕
-
-    # glPushMatrix()
-    # glTranslated(-2.0, 2.0, 0.0)
-    # glPushMatrix()
-    # glScaled(0.0, 0.0, 0.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-    # glRotated(-shoulder, 1.0, 0.0, 0.0)
-    # glTranslated(0.0, -1.0, 0.0)
-    # glPushMatrix()
-    # glScaled(1.0, -2.0, 1.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-    # glTranslated(0.0, -1.0, 0.0)
-    # glRotated(-elbow + 180, 1.0, 0.0, 0.0)
-    # glTranslated(0.0, -1.0, 0.0)
-    # glPushMatrix()
-    # glScaled(1.0, 2.0, 1.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-    # glPopMatrix()
+    robotDisplay()
 
 
 
-    # glPushMatrix()
-    # glTranslated(0.0, 3.0, 0.0)
-    # glPushMatrix()
-    # glutWireSphere(1.0, 10, 10)
-    # glPopMatrix()
-    # glPopMatrix()
 
-    # glPushMatrix()
-    # glTranslated(1.0, -2.0, 0.0)
-    # glPushMatrix()
-    # glScaled(0.0, 0.0, 0.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-    # glRotated(-thigh - 15, 1.0, 0.0, 0.0)
-    # glTranslated(0.0, -1.5, 0.0)
-    # glPushMatrix()
-    # glScaled(1.0, -3.0, 1.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-    # glTranslated(0.0, -1.5, 0.0)
-    # glRotated(-shin + 15, 1.0, 0.0, 0.0)
-    # glTranslated(0.0, -1.0, 0.0)
-    # glPushMatrix()
-    # glScaled(1.0, 2.0, 1.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-    # glPopMatrix()
-
-    # glPushMatrix()
-    # glTranslated(-1.0, -2.0, 0.0)
-    # glPushMatrix()
-    # glScaled(0.0, 0.0, 0.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-    # glRotated(thigh - 15, 1.0, 0.0, 0.0)
-    # glTranslated(0.0, -1.5, 0.0)
-    # glPushMatrix()
-    # glScaled(1.0, -3.0, 1.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-    # glTranslated(0.0, -1.5, 0.0)
-    # glRotated(shin + 15, 1.0, 0.0, 0.0)
-    # glTranslated(0.0, -1.0, 0.0)
-    # glPushMatrix()
-    # glScaled(1.0, 2.0, 1.0)
-    # glutWireCube(1.0)
-    # glPopMatrix()
-    # glPopMatrix()
-
-    # glPopMatrix()
 
     glutSwapBuffers()
 
