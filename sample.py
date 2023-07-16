@@ -86,13 +86,16 @@ import sys
 
 gPitch = 30
 gYaw = 30
+endF = 0
 
 def mySetLight():
     light0_position = [1.0, 1.0, 1.0, 1.0]
 
+
     glLightfv(GL_LIGHT0, GL_POSITION, light0_position)
     glEnable(GL_LIGHT0)
     glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
+    # glLightModelf(GL_LIGHT_MODEL_AMBIENT, [1, 1, 1, 1])
 
 def myInit():
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH)
@@ -131,29 +134,29 @@ def myDisplay():
     glVertex3d(1, 1, -1)
     glVertex3d(1, -1, -1)
 
-    glNormal3d(1, 0, 0)
-    glVertex3d(1, -1, -1)
-    glVertex3d(1, 1, -1)
-    glVertex3d(1, 1, 1)
-    glVertex3d(1, -1, 1)
+    # glNormal3d(1, 0, 0)
+    # glVertex3d(1, -1, -1)
+    # glVertex3d(1, 1, -1)
+    # glVertex3d(1, 1, 1)
+    # glVertex3d(1, -1, 1)
 
-    glNormal3d(-1, 0, 0)
-    glVertex3d(-1, -1, -1)
-    glVertex3d(-1, -1, 1)
-    glVertex3d(-1, 1, 1)
-    glVertex3d(-1, 1, -1)
+    # glNormal3d(-1, 0, 0)
+    # glVertex3d(-1, -1, -1)
+    # glVertex3d(-1, -1, 1)
+    # glVertex3d(-1, 1, 1)
+    # glVertex3d(-1, 1, -1)
 
-    glNormal3d(0, 1, 0)
-    glVertex3d(-1, 1, -1)
-    glVertex3d(-1, 1, 1)
-    glVertex3d(1, 1, 1)
-    glVertex3d(1, 1, -1)
+    # glNormal3d(0, 1, 0)
+    # glVertex3d(-1, 1, -1)
+    # glVertex3d(-1, 1, 1)
+    # glVertex3d(1, 1, 1)
+    # glVertex3d(1, 1, -1)
 
-    glNormal3d(0, -1, 0)
-    glVertex3d(-1, -1, -1)
-    glVertex3d(1, -1, -1)
-    glVertex3d(1, -1, 1)
-    glVertex3d(-1, -1, 1)
+    # glNormal3d(0, -1, 0)
+    # glVertex3d(-1, -1, -1)
+    # glVertex3d(1, -1, -1)
+    # glVertex3d(1, -1, 1)
+    # glVertex3d(-1, -1, 1)
 
     glEnd()
 
@@ -184,6 +187,10 @@ def myTimer(value):
 
 def myKeyboard(key, x, y):
     if key == b'\x1b':
+        endF += 1
+
+def myIdle():
+    if endF:
         sys.exit()
 
 def main():
@@ -194,6 +201,7 @@ def main():
     glutTimerFunc(30, myTimer, 1)
     glutReshapeFunc(myReshape)
     glutDisplayFunc(myDisplay)
+    glutIdleFunc(myIdle)
     glutMainLoop()
 
 if __name__ == "__main__":
