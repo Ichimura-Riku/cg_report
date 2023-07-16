@@ -12,21 +12,25 @@ shin = 0
 fast = 0
 rad = 0
 endF = 0
-gPitch = 30
-gYaw = 30
+gPitch = 0
+gYaw = 0
 
 def end():
     sys.exit()
 
 def myInit():
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH)
-    glutInitWindowSize(500, 500)
+    glutInitWindowSize(800, 800)
     glutInitWindowPosition(0, 0)
     glutCreateWindow(b"p3-robot")
     glClearColor(0.0, 0.0, 0.0, 0.0)
 
 def mySetLight():
+    light0_position = [1.0, 1.0, 1.0, 1.0]
+    glLightfv(GL_LIGHT0, GL_POSITION, light0_position)
     glEnable(GL_LIGHT0)
+    glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
+
 
 def robotBody():
 
@@ -35,15 +39,76 @@ def robotBody():
     z = 1.0 / 2
 
     glPushMatrix()
-    # glRotated(gPitch, 1, 0, 0)
-    # glRotated(gYaw, 0, 0, 1)
+    glRotated(gPitch, 1, 0, 0)
+    glRotated(gYaw, 0, 0, 1)
 
     glBegin(GL_QUADS)
-    glNormal3d(0, 0, 0.5)
+    glNormal3d(0, 0, -0.5)
     glVertex3d(-x, y, -z)
     glVertex3d(x, y, -z)
     glVertex3d(x, -y, -z)
     glVertex3d(-x, -y, -z)
+
+    glNormal3d(0, 0, 0.5)
+    glVertex3d(-x, -y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(-x, y, z)
+
+    glNormal3d(1, 0, 0)
+    glVertex3d(x, -y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, -y, z)
+
+    glNormal3d(-1, 0, 0)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(-x, y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(0, 1, 0)
+    glVertex3d(-x, y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, y, -z)
+    glVertex3d(-x, y, -z)
+
+    glNormal3d(0, -1, 0)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(x, -y, z)
+    glVertex3d(-x, -y, z)
+
+    glEnd()
+
+    glPopMatrix()
+
+def robotRightArm():
+    x =1.0 / 2
+    y = -2.0 / 2
+    z = 1.0 / 2
+    glPushMatrix()
+
+
+    glRotated(gPitch, 1, 0, 0)
+    glRotated(gYaw, 0, 0, 1)
+    glTranslated(2.0, 2.0, 0.0)
+    glRotated(shoulder, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+
+    glBegin(GL_QUADS)
+    glNormal3d(0, 0, -0.5)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(-x, y, -z)
+
+    glNormal3d(0, 0, 0.5)
+    glVertex3d(-x, y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(-x, -y, z)
 
     glNormal3d(1, 0, 0)
     glVertex3d(x, -y, z)
@@ -52,16 +117,16 @@ def robotBody():
     glVertex3d(x, -y, -z)
 
     glNormal3d(-1, 0, 0)
-    glVertex3d(-x, -y, z)
-    glVertex3d(-x, y, z)
-    glVertex3d(-x, y, -z)
     glVertex3d(-x, -y, -z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(-x, y, z)
+    glVertex3d(-x, -y, z)
 
     glNormal3d(0, 1, 0)
-    glVertex3d(-x, y, z)
-    glVertex3d(x, y, z)
-    glVertex3d(x, y, -z)
     glVertex3d(-x, y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, y, z)
+    glVertex3d(-x, y, z)
 
     glNormal3d(0, -1, 0)
     glVertex3d(-x, -y, z)
@@ -71,22 +136,30 @@ def robotBody():
 
     glEnd()
 
+
     glPopMatrix()
-def robotRightArm():
-    x = 3.0 / 2
-    y = 4.0 / 2
-    z = 1.0 / 2
+
+    # glRotated(gPitch, 1, 0, 0)
+    # glRotated(gYaw, 0, 0, 1)
+    glTranslated(0.0, -1.0, 0.0)
+    glRotated(elbow, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
 
     glPushMatrix()
-    # glRotated(gPitch, 1, 0, 0)
-    # glRotated(gYaw, 0, 0, 1)
-
     glBegin(GL_QUADS)
-    glNormal3d(0, 0, 0.5)
-    glVertex3d(-x, y, -z)
-    glVertex3d(x, y, -z)
-    glVertex3d(x, -y, -z)
+
+
+    glNormal3d(0, 0, -0.5)
     glVertex3d(-x, -y, -z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(-x, y, -z)
+
+    glNormal3d(0, 0, 0.5)
+    glVertex3d(-x, y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(-x, -y, z)
 
     glNormal3d(1, 0, 0)
     glVertex3d(x, -y, z)
@@ -95,16 +168,71 @@ def robotRightArm():
     glVertex3d(x, -y, -z)
 
     glNormal3d(-1, 0, 0)
-    glVertex3d(-x, -y, z)
-    glVertex3d(-x, y, z)
-    glVertex3d(-x, y, -z)
     glVertex3d(-x, -y, -z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(-x, y, z)
+    glVertex3d(-x, -y, z)
 
     glNormal3d(0, 1, 0)
-    glVertex3d(-x, y, z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(x, y, -z)
     glVertex3d(x, y, z)
+    glVertex3d(-x, y, z)
+
+    glNormal3d(0, -1, 0)
+    glVertex3d(-x, -y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(-x, -y, -z)
+
+    glEnd()
+    glPopMatrix()
+    glPopMatrix()
+
+def robotLeftArm():
+    x =1.0 / 2
+    y = -2.0 / 2
+    z = 1.0 / 2
+    glPushMatrix()
+
+
+    glRotated(gPitch, 1, 0, 0)
+    glRotated(gYaw, 0, 0, 1)
+    glTranslated(-2.0, 2.0, 0.0)
+    glRotated(-shoulder, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+    glPushMatrix()
+
+    glBegin(GL_QUADS)
+    glNormal3d(0, 0, -0.5)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(x, -y, -z)
     glVertex3d(x, y, -z)
     glVertex3d(-x, y, -z)
+
+    glNormal3d(0, 0, 0.5)
+    glVertex3d(-x, y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(1, 0, 0)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, -y, -z)
+
+    glNormal3d(-1, 0, 0)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(-x, y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(0, 1, 0)
+    glVertex3d(-x, y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, y, z)
+    glVertex3d(-x, y, z)
 
     glNormal3d(0, -1, 0)
     glVertex3d(-x, -y, z)
@@ -114,8 +242,58 @@ def robotRightArm():
 
     glEnd()
 
+
     glPopMatrix()
 
+    # glRotated(gPitch, 1, 0, 0)
+    # glRotated(gYaw, 0, 0, 1)
+    glTranslated(0.0, -1.0, 0.0)
+    glRotated(-elbow + 180, 1.0, 0.0, 0.0)
+    glTranslated(0.0, -1.0, 0.0)
+
+    glPushMatrix()
+    glBegin(GL_QUADS)
+
+
+    glNormal3d(0, 0, -0.5)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(-x, y, -z)
+
+    glNormal3d(0, 0, 0.5)
+    glVertex3d(-x, y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(1, 0, 0)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, y, z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, -y, -z)
+
+    glNormal3d(-1, 0, 0)
+    glVertex3d(-x, -y, -z)
+    glVertex3d(-x, y, -z)
+    glVertex3d(-x, y, z)
+    glVertex3d(-x, -y, z)
+
+    glNormal3d(0, 1, 0)
+    glVertex3d(-x, y, -z)
+    glVertex3d(x, y, -z)
+    glVertex3d(x, y, z)
+    glVertex3d(-x, y, z)
+
+    glNormal3d(0, -1, 0)
+    glVertex3d(-x, -y, z)
+    glVertex3d(x, -y, z)
+    glVertex3d(x, -y, -z)
+    glVertex3d(-x, -y, -z)
+
+    glEnd()
+    glPopMatrix()
+    glPopMatrix()
 
 
 
@@ -127,6 +305,7 @@ def myDisplay():
     ambient = [0.25, 0.25, 0.25, 1.0]
     diffuse = [0.4, 0.4, 0.4, 1.0]
     specular = [0.774597, 0.774597, 0.774597, 1.0]
+    insideface = [1.0, 0.0, 0.0, 1.0]
     shininess = [76.8]
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -136,9 +315,13 @@ def myDisplay():
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse)
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular)
     glMaterialfv(GL_FRONT, GL_SHININESS, shininess)
+    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, insideface)
+    glMaterialf(GL_BACK, GL_SHININESS, 60)
 
     # 図形描写
-    # robotBody()
+    robotBody()
+    robotRightArm()
+    robotLeftArm()
 
 
     glTranslated(0.0, 0.0, 0.0)
@@ -150,28 +333,32 @@ def myDisplay():
 
     # glPushMatrix()
     # 右側の腕
-    glPushMatrix()
-    glTranslated(2.0, 2.0, 0.0)
-    glPushMatrix()
-    glScaled(0.0, 0.0, 0.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glRotated(shoulder, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.0, 0.0)
-    glPushMatrix()
-    glScaled(1.0, -2.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glTranslated(0.0, -1.0, 0.0)
-    glRotated(elbow, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.0, 0.0)
-    glPushMatrix()
-    glScaled(1.0, 2.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glPopMatrix()
+    # glPushMatrix()
+    # glTranslated(2.0, 2.0, 0.0)
+    # glPushMatrix()
+    # glScaled(0.0, 0.0, 0.0)
+    # glutWireCube(1.0)
+    # glPopMatrix()
+
+    # glRotated(shoulder, 1.0, 0.0, 0.0)
+    # glTranslated(0.0, -1.0, 0.0)
+    # glPushMatrix()
+    # glScaled(1.0, -2.0, 1.0)
+    # glutWireCube(1.0)
+    # glPopMatrix()
+
+    # glTranslated(0.0, -1.0, 0.0)
+    # glRotated(elbow, 1.0, 0.0, 0.0)
+    # glTranslated(0.0, -1.0, 0.0)
+    # glPushMatrix()
+    # glScaled(1.0, 2.0, 1.0)
+    # glutWireCube(1.0)
+    # glPopMatrix()
+
+    # glPopMatrix()
 
 
+    # 左側の腕
 
     # glPushMatrix()
     # glTranslated(-2.0, 2.0, 0.0)
@@ -193,6 +380,8 @@ def myDisplay():
     # glutWireCube(1.0)
     # glPopMatrix()
     # glPopMatrix()
+
+
 
     # glPushMatrix()
     # glTranslated(0.0, 3.0, 0.0)
@@ -253,14 +442,14 @@ def myReshape(width, height):
     glViewport(0, 0, width, height)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    # gluPerspective(60.0, width / height, 0.1, 20.0)
-    if width <= height:
-        glOrtho(-a, a, -a * height / width, a * height / width, -z, z)
-    else:
-        glOrtho(-a * width / height, a * width / height, -a, a, -z, z)
+    gluPerspective(60.0, width / height, 0.1, 20.0)
+    # if width <= height:
+    #     glOrtho(-a, a, -a * height / width, a * height / width, -z, z)
+    # else:
+    #     glOrtho(-a * width / height, a * width / height, -a, a, -z, z)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
-    gluLookAt(0.0, 0.0, 15.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
+    gluLookAt(0.0, 0.0, 15.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0)
 
 def myKeyboard(key, x, y):
     global fast
@@ -293,7 +482,7 @@ def main():
     glutInit()
     myInit()
     glutKeyboardFunc(myKeyboard)
-    glutTimerFunc(30, myTimer, 1)
+    # glutTimerFunc(30, myTimer, 1)
     glutReshapeFunc(myReshape)
     glutIdleFunc(myIdle)
     mySetLight()
