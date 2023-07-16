@@ -81,6 +81,7 @@
 
 
 from OpenGL.GL import *
+from OpenGL.GLU import *
 from OpenGL.GLUT import *
 import sys
 
@@ -116,12 +117,15 @@ def myDisplay():
     glEnable(GL_DEPTH_TEST)
     glEnable(GL_LIGHTING)
 
+
     glMaterialfv(GL_FRONT, GL_AMBIENT, ambient)
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse)
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular)
     glMaterialf(GL_FRONT, GL_SHININESS, 50)
     glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, insideface)
     glMaterialf(GL_BACK, GL_SHININESS, 60)
+    # glMaterialfv(GL_BACK, GL_COLOR_INDEXES, [0, 0, 1])
+
 
     glPushMatrix()
     glRotated(gPitch, 1, 0, 0)
@@ -134,29 +138,29 @@ def myDisplay():
     glVertex3d(1, 1, -1)
     glVertex3d(1, -1, -1)
 
-    # glNormal3d(1, 0, 0)
-    # glVertex3d(1, -1, -1)
-    # glVertex3d(1, 1, -1)
-    # glVertex3d(1, 1, 1)
-    # glVertex3d(1, -1, 1)
+    glNormal3d(1, 0, 0)
+    glVertex3d(1, -1, -1)
+    glVertex3d(1, 1, -1)
+    glVertex3d(1, 1, 1)
+    glVertex3d(1, -1, 1)
 
-    # glNormal3d(-1, 0, 0)
-    # glVertex3d(-1, -1, -1)
-    # glVertex3d(-1, -1, 1)
-    # glVertex3d(-1, 1, 1)
-    # glVertex3d(-1, 1, -1)
+    glNormal3d(-1, 0, 0)
+    glVertex3d(-1, -1, -1)
+    glVertex3d(-1, -1, 1)
+    glVertex3d(-1, 1, 1)
+    glVertex3d(-1, 1, -1)
 
-    # glNormal3d(0, 1, 0)
-    # glVertex3d(-1, 1, -1)
-    # glVertex3d(-1, 1, 1)
-    # glVertex3d(1, 1, 1)
-    # glVertex3d(1, 1, -1)
+    glNormal3d(0, 1, 0)
+    glVertex3d(-1, 1, -1)
+    glVertex3d(-1, 1, 1)
+    glVertex3d(1, 1, 1)
+    glVertex3d(1, 1, -1)
 
-    # glNormal3d(0, -1, 0)
-    # glVertex3d(-1, -1, -1)
-    # glVertex3d(1, -1, -1)
-    # glVertex3d(1, -1, 1)
-    # glVertex3d(-1, -1, 1)
+    glNormal3d(0, -1, 0)
+    glVertex3d(-1, -1, -1)
+    glVertex3d(1, -1, -1)
+    glVertex3d(1, -1, 1)
+    glVertex3d(-1, -1, 1)
 
     glEnd()
 
@@ -174,6 +178,8 @@ def myReshape(width, height):
         glOrtho(-a, a, -a * height / width, a * height / width, -z, z)
     else:
         glOrtho(-a * width / height, a * width / height, -a, a, -z, z)
+    # gluPerspective(60.0, width / height, -0.01, 100.0)
+
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
@@ -181,8 +187,8 @@ def myTimer(value):
     if value == 1:
         glutTimerFunc(30, myTimer, 1)
         global gPitch, gYaw
-        gYaw = (gYaw + 1) % 360
-        gPitch = (gPitch + 1) % 360
+        gYaw = (gYaw + 2) % 360
+        gPitch = (gPitch + 2) % 360
         glutPostRedisplay()
 
 def myKeyboard(key, x, y):

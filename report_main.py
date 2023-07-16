@@ -173,7 +173,7 @@ def main():
     glutKeyboardFunc(myKeyboard)
     glutReshapeFunc(myReshape)
     glutIdleFunc(myIdle)
-    # mySetLight()
+    mySetLight()
     glutDisplayFunc(myDisplay)
     glutMainLoop()
 
