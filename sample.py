@@ -1,3 +1,171 @@
+# import math
+# from OpenGL.GL import *
+# from OpenGL.GLUT import *
+
+# shoulder = 0
+# elbow = 0
+# thigh = 0
+# shin = 0
+# fast = 0
+# rad = 0
+
+# def myInit():
+#     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA)
+#     glutInitWindowSize(500, 500)
+#     glutInitWindowPosition(0, 0)
+#     glutCreateWindow(b"p3-robot")
+#     glClearColor(0.0, 0.0, 0.0, 0.0)
+
+# def myDisplay():
+#     glClear(GL_COLOR_BUFFER_BIT)
+
+#     glTranslated(0.0, 0.0, 0.0)
+#     glPushMatrix()
+#     glScaled(3.0, 4.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+
+#     glPushMatrix()
+#     glPushMatrix()
+#     glTranslated(2.0, 2.0, 0.0)
+#     glPushMatrix()
+#     glScaled(0.0, 0.0, 0.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glRotated(shoulder, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, -2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glTranslated(0.0, -1.0, 0.0)
+#     glRotated(elbow, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, 2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glPopMatrix()
+
+#     glPushMatrix()
+#     glTranslated(-2.0, 2.0, 0.0)
+#     glPushMatrix()
+#     glScaled(0.0, 0.0, 0.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glRotated(-shoulder, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, -2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glTranslated(0.0, -1.0, 0.0)
+#     glRotated(-elbow + 180, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, 2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glPopMatrix()
+
+#     glPushMatrix()
+#     glTranslated(0.0, 3.0, 0.0)
+#     glPushMatrix()
+#     glutWireSphere(1.0, 10, 10)
+#     glPopMatrix()
+#     glPopMatrix()
+
+#     glPushMatrix()
+#     glTranslated(1.0, -2.0, 0.0)
+#     glPushMatrix()
+#     glScaled(0.0, 0.0, 0.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glRotated(-thigh - 15, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.5, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, -3.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glTranslated(0.0, -1.5, 0.0)
+#     glRotated(-shin + 15, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, 2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glPopMatrix()
+
+#     glPushMatrix()
+#     glTranslated(-1.0, -2.0, 0.0)
+#     glPushMatrix()
+#     glScaled(0.0, 0.0, 0.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glRotated(thigh - 15, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.5, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, -3.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glTranslated(0.0, -1.5, 0.0)
+#     glRotated(shin + 15, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, 2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glPopMatrix()
+
+#     glPopMatrix()
+
+#     glutSwapBuffers()
+
+# def myReshape(width, height):
+#     glViewport(0, 0, width, height)
+#     glMatrixMode(GL_PROJECTION)
+#     glLoadIdentity()
+#     gluPerspective(60.0, width / height, 0.1, 20.0)
+#     glMatrixMode(GL_MODELVIEW)
+#     glLoadIdentity()
+#     gluLookAt(0.0, 0.0, 15.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
+
+# def myKeyboard(key, x, y):
+#     global fast
+#     if key == b'u':
+#         fast = 0.002 - fast
+#     elif key == b'\x1b':
+#         sys.exit()
+
+# def myIdle():
+#     global rad, shoulder, elbow, thigh, shin
+#     rad = (rad + 0.0001 + fast) % 2.0
+#     shoulder = int(math.sin(rad * math.pi) * 60)
+#     elbow = int(-math.sin(rad * math.pi) * 60 - 90)
+#     thigh = int(math.sin(rad * math.pi) * 30)
+#     shin = int(-math.sin(rad * math.pi) * 30)
+#     glutPostRedisplay()
+
+# def main():
+#     glutInit()
+#     myInit()
+#     glutKeyboardFunc(myKeyboard)
+#     glutReshapeFunc(myReshape)
+#     glutIdleFunc(myIdle)
+#     glutDisplayFunc(myDisplay)
+#     glutMainLoop()
+
+# if __name__ == "__main__":
+#     main()
+
+########################################################################
+########################################################################
+########################################################################
+########################################################################
+########################################################################
+
+
+
 # from OpenGL.GL import *
 # from OpenGL.GLU import *
 # from OpenGL.GLUT import *
@@ -127,44 +295,86 @@ def myDisplay():
     # glMaterialfv(GL_BACK, GL_COLOR_INDEXES, [0, 0, 1])
 
 
-    glPushMatrix()
-    glRotated(gPitch, 1, 0, 0)
-    glRotated(gYaw, 0, 0, 1)
+    # glPushMatrix()
+    # glRotated(gPitch, 1, 0, 0)
+    # glRotated(gYaw, 0, 0, 1)
 
-    glBegin(GL_QUADS)
-    glNormal3d(0, 0, -1)
-    glVertex3d(-1, -1, -1)
-    glVertex3d(-1, 1, -1)
-    glVertex3d(1, 1, -1)
-    glVertex3d(1, -1, -1)
+    # glBegin(GL_QUADS)
+    # glNormal3d(0, 0, -1)
+    # glVertex3d(-1, -1, -1)
+    # glVertex3d(-1, 1, -1)
+    # glVertex3d(1, 1, -1)
+    # glVertex3d(1, -1, -1)
 
-    glNormal3d(1, 0, 0)
-    glVertex3d(1, -1, -1)
-    glVertex3d(1, 1, -1)
-    glVertex3d(1, 1, 1)
-    glVertex3d(1, -1, 1)
+    # glNormal3d(1, 0, 0)
+    # glVertex3d(1, -1, -1)
+    # glVertex3d(1, 1, -1)
+    # glVertex3d(1, 1, 1)
+    # glVertex3d(1, -1, 1)
 
-    glNormal3d(-1, 0, 0)
-    glVertex3d(-1, -1, -1)
-    glVertex3d(-1, -1, 1)
-    glVertex3d(-1, 1, 1)
-    glVertex3d(-1, 1, -1)
+    # glNormal3d(-1, 0, 0)
+    # glVertex3d(-1, -1, -1)
+    # glVertex3d(-1, -1, 1)
+    # glVertex3d(-1, 1, 1)
+    # glVertex3d(-1, 1, -1)
 
-    glNormal3d(0, 1, 0)
-    glVertex3d(-1, 1, -1)
-    glVertex3d(-1, 1, 1)
-    glVertex3d(1, 1, 1)
-    glVertex3d(1, 1, -1)
+    # glNormal3d(0, 1, 0)
+    # glVertex3d(-1, 1, -1)
+    # glVertex3d(-1, 1, 1)
+    # glVertex3d(1, 1, 1)
+    # glVertex3d(1, 1, -1)
 
-    glNormal3d(0, -1, 0)
-    glVertex3d(-1, -1, -1)
-    glVertex3d(1, -1, -1)
-    glVertex3d(1, -1, 1)
-    glVertex3d(-1, -1, 1)
+    # glNormal3d(0, -1, 0)
+    # glVertex3d(-1, -1, -1)
+    # glVertex3d(1, -1, -1)
+    # glVertex3d(1, -1, 1)
+    # glVertex3d(-1, -1, 1)
 
-    glEnd()
+    # glEnd()
 
-    glPopMatrix()
+    # glPopMatrix()
+
+
+    # x = 3.0 / 2
+    # y = 4.0 / 2
+    # z = 1.0 / 2
+
+    # glPushMatrix()
+
+    # glBegin(GL_QUAD_STRIP)
+    # glNormal3d(0, 0, -1)
+    # glVertex3d(x, y, -z)
+    # glVertex3d(-x, y, -z)
+    # glVertex3d(x, -y, -z)
+    # glVertex3d(-x, -y, -z)
+
+    # glNormal3d(1, 0, 0)
+    # glVertex3d(x, y, z)
+    # glVertex3d(x, -y, z)
+    # glVertex3d(x, y, -z)
+    # glVertex3d(x, -y, -z)
+
+    # glNormal3d(-1, 0, 0)
+    # glVertex3d(-x, y, z)
+    # glVertex3d(-x, -y, z)
+    # glVertex3d(-x, y, -z)
+    # glVertex3d(-x, -y, -z)
+
+    # glNormal3d(0, 1, 0)
+    # glVertex3d(x, y, z)
+    # glVertex3d(-x, y, z)
+    # glVertex3d(x, y, -z)
+    # glVertex3d(-x, y, -z)
+
+    # glNormal3d(0, -1, 0)
+    # glVertex3d(x, -y, z)
+    # glVertex3d(-x, -y, z)
+    # glVertex3d(x, -y, -z)
+    # glVertex3d(-x, -y, -z)
+
+    # glEnd()
+
+    # glPopMatrix()
     glutSwapBuffers()
 
 def myReshape(width, height):
