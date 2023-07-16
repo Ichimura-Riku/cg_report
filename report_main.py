@@ -28,14 +28,18 @@ def mySetLight():
 
 
 def myDisplay():
-    mtrl_specular = [1.0, 1.0, 1.0, 1.0]
-    mtrl_shininess = [50.0]
+
+    ambient = [0.7, 0.7, 0.7, 1.0]
+    diffuse = [0.75, 0.75, 0.75, 1.0]
+    specular = [0.25, 0.25, 0.25, 1.0]
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
     glEnable(GL_DEPTH_TEST)
     glEnable(GL_LIGHTING)
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mtrl_specular)
-    glMaterialfv(GL_FRONT, GL_SHININESS, mtrl_shininess)
+    glMaterialfv(GL_FRONT, GL_AMBIENT, ambient)
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse)
+    glMaterialfv(GL_FRONT, GL_SPECULAR, specular)
+    glMaterialf(GL_FRONT, GL_SHININESS, 50)
 
     glTranslated(0.0, 0.0, 0.0)
     glPushMatrix()
