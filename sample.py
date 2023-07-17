@@ -1,165 +1,165 @@
-import math
-from OpenGL.GL import *
-from OpenGL.GLU import *
-from OpenGL.GLUT import *
+# import math
+# from OpenGL.GL import *
+# from OpenGL.GLU import *
+# from OpenGL.GLUT import *
 
-shoulder = 0
-elbow = 0
-thigh = 0
-shin = 0
-fast = 0
-rad = 0
+# shoulder = 0
+# elbow = 0
+# thigh = 0
+# shin = 0
+# fast = 0
+# rad = 0
 
-def myInit():
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA)
-    glutInitWindowSize(500, 500)
-    glutInitWindowPosition(0, 0)
-    glutCreateWindow(b"p3-robot")
-    glClearColor(0.0, 0.0, 0.0, 0.0)
+# def myInit():
+#     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA)
+#     glutInitWindowSize(500, 500)
+#     glutInitWindowPosition(0, 0)
+#     glutCreateWindow(b"p3-robot")
+#     glClearColor(0.0, 0.0, 0.0, 0.0)
 
-def myDisplay():
-    glClear(GL_COLOR_BUFFER_BIT)
+# def myDisplay():
+#     glClear(GL_COLOR_BUFFER_BIT)
 
-    glTranslated(0.0, 0.0, 0.0)
-    glPushMatrix()
-    glScaled(3.0, 4.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
+#     glTranslated(0.0, 0.0, 0.0)
+#     glPushMatrix()
+#     glScaled(3.0, 4.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
 
-    glPushMatrix()
-    glPushMatrix()
-    glTranslated(2.0, 2.0, 0.0)
-    glPushMatrix()
-    glScaled(0.0, 0.0, 0.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glRotated(shoulder, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.0, 0.0)
-    glPushMatrix()
-    glScaled(1.0, -2.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glTranslated(0.0, -1.0, 0.0)
-    glRotated(elbow, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.0, 0.0)
-    glPushMatrix()
-    glScaled(1.0, 2.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glPopMatrix()
+#     glPushMatrix()
+#     glPushMatrix()
+#     glTranslated(2.0, 2.0, 0.0)
+#     glPushMatrix()
+#     glScaled(0.0, 0.0, 0.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glRotated(shoulder, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, -2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glTranslated(0.0, -1.0, 0.0)
+#     glRotated(elbow, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, 2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glPopMatrix()
 
-    glPushMatrix()
-    glTranslated(-2.0, 2.0, 0.0)
-    glPushMatrix()
-    glScaled(0.0, 0.0, 0.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glRotated(-shoulder, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.0, 0.0)
-    glPushMatrix()
-    glScaled(1.0, -2.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glTranslated(0.0, -1.0, 0.0)
-    glRotated(-elbow + 180, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.0, 0.0)
-    glPushMatrix()
-    glScaled(1.0, 2.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glPopMatrix()
+#     glPushMatrix()
+#     glTranslated(-2.0, 2.0, 0.0)
+#     glPushMatrix()
+#     glScaled(0.0, 0.0, 0.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glRotated(-shoulder, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, -2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glTranslated(0.0, -1.0, 0.0)
+#     glRotated(-elbow + 180, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, 2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glPopMatrix()
 
-    glPushMatrix()
-    glTranslated(0.0, 3.0, 0.0)
-    glPushMatrix()
-    glutWireSphere(1.0, 10, 10)
-    glPopMatrix()
-    glPopMatrix()
+#     glPushMatrix()
+#     glTranslated(0.0, 3.0, 0.0)
+#     glPushMatrix()
+#     glutWireSphere(1.0, 10, 10)
+#     glPopMatrix()
+#     glPopMatrix()
 
-# 脚
+# # 脚
 
-    glPushMatrix()
-    glTranslated(1.0, -2.0, 0.0)
-    glPushMatrix()
-    glScaled(0.0, 0.0, 0.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glRotated(-thigh - 15, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.5, 0.0)
-    glPushMatrix()
-    glScaled(1.0, -3.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glTranslated(0.0, -1.5, 0.0)
-    glRotated(-shin + 15, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.0, 0.0)
-    glPushMatrix()
-    glScaled(1.0, 2.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glPopMatrix()
+#     glPushMatrix()
+#     glTranslated(1.0, -2.0, 0.0)
+#     glPushMatrix()
+#     glScaled(0.0, 0.0, 0.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glRotated(-thigh - 15, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.5, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, -3.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glTranslated(0.0, -1.5, 0.0)
+#     glRotated(-shin + 15, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, 2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glPopMatrix()
 
-    glPushMatrix()
-    glTranslated(-1.0, -2.0, 0.0)
-    glPushMatrix()
-    glScaled(0.0, 0.0, 0.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glRotated(thigh - 15, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.5, 0.0)
-    glPushMatrix()
-    glScaled(1.0, -3.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glTranslated(0.0, -1.5, 0.0)
-    glRotated(shin + 15, 1.0, 0.0, 0.0)
-    glTranslated(0.0, -1.0, 0.0)
-    glPushMatrix()
-    glScaled(1.0, 2.0, 1.0)
-    glutWireCube(1.0)
-    glPopMatrix()
-    glPopMatrix()
+#     glPushMatrix()
+#     glTranslated(-1.0, -2.0, 0.0)
+#     glPushMatrix()
+#     glScaled(0.0, 0.0, 0.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glRotated(thigh - 15, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.5, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, -3.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glTranslated(0.0, -1.5, 0.0)
+#     glRotated(shin + 15, 1.0, 0.0, 0.0)
+#     glTranslated(0.0, -1.0, 0.0)
+#     glPushMatrix()
+#     glScaled(1.0, 2.0, 1.0)
+#     glutWireCube(1.0)
+#     glPopMatrix()
+#     glPopMatrix()
 
-    glPopMatrix()
+#     glPopMatrix()
 
-    glutSwapBuffers()
+#     glutSwapBuffers()
 
-def myReshape(width, height):
-    glViewport(0, 0, width, height)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    gluPerspective(60.0, width / height, 0.1, 20.0)
-    glMatrixMode(GL_MODELVIEW)
-    glLoadIdentity()
-    gluLookAt(0.0, 0.0, 15.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
+# def myReshape(width, height):
+#     glViewport(0, 0, width, height)
+#     glMatrixMode(GL_PROJECTION)
+#     glLoadIdentity()
+#     gluPerspective(60.0, width / height, 0.1, 20.0)
+#     glMatrixMode(GL_MODELVIEW)
+#     glLoadIdentity()
+#     gluLookAt(0.0, 0.0, 15.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
 
-def myKeyboard(key, x, y):
-    global fast
-    if key == b'u':
-        fast = 0.002 - fast
-    elif key == b'\x1b':
-        sys.exit()
+# def myKeyboard(key, x, y):
+#     global fast
+#     if key == b'u':
+#         fast = 0.002 - fast
+#     elif key == b'\x1b':
+#         sys.exit()
 
-def myIdle():
-    global rad, shoulder, elbow, thigh, shin
-    rad = (rad + 0.0001 + fast) % 2.0
-    shoulder = int(math.sin(rad * math.pi) * 60)
-    elbow = int(-math.sin(rad * math.pi) * 60 - 90)
-    thigh = int(math.sin(rad * math.pi) * 30)
-    shin = int(-math.sin(rad * math.pi) * 30)
-    glutPostRedisplay()
+# def myIdle():
+#     global rad, shoulder, elbow, thigh, shin
+#     rad = (rad + 0.0001 + fast) % 2.0
+#     shoulder = int(math.sin(rad * math.pi) * 60)
+#     elbow = int(-math.sin(rad * math.pi) * 60 - 90)
+#     thigh = int(math.sin(rad * math.pi) * 30)
+#     shin = int(-math.sin(rad * math.pi) * 30)
+#     glutPostRedisplay()
 
-def main():
-    glutInit()
-    myInit()
-    glutKeyboardFunc(myKeyboard)
-    glutReshapeFunc(myReshape)
-    glutIdleFunc(myIdle)
-    glutDisplayFunc(myDisplay)
-    glutMainLoop()
+# def main():
+#     glutInit()
+#     myInit()
+#     glutKeyboardFunc(myKeyboard)
+#     glutReshapeFunc(myReshape)
+#     glutIdleFunc(myIdle)
+#     glutDisplayFunc(myDisplay)
+#     glutMainLoop()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
 ########################################################################
 ########################################################################
@@ -428,3 +428,62 @@ if __name__ == "__main__":
 
 # if __name__ == "__main__":
 #     main()
+
+
+import math
+from OpenGL.GL import *
+from OpenGL.GLU import *
+from OpenGL.GLUT import *
+
+theta = 0.0  # angular of tea pot
+
+def myKeyboard(key, x, y):
+    if key == b'\x1b':
+        exit(0)
+
+def polarView(distance, twist, elevation, azimuth):
+    glTranslated(0.0, 0.0, -distance)
+    glRotated(-twist, 0.0, 0.0, 1.0)
+    glRotated(-elevation, 1.0, 0.0, 0.0)
+    glRotated(-azimuth, 0.0, 1.0, 0.0)
+
+def myDisplay():
+    glClear(GL_COLOR_BUFFER_BIT)
+
+    glPushMatrix()
+    polarView(5.0, 0.0, 10.0, theta)
+    glColor3d(1.0, 1.0, 1.0)
+    glutWireTeapot(1.0)
+    glPopMatrix()
+
+    glutSwapBuffers()
+
+def myIdle():
+    global theta
+    theta = (theta + 0.5) % 360.0
+    glutPostRedisplay()
+
+def myInit(progname):
+    width, height = 500, 500
+
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA)
+    glutInitWindowSize(width, height)
+    glutInitWindowPosition(0, 0)
+    glutCreateWindow(progname)
+    glClearColor(0.0, 0.0, 0.0, 1.0)
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+    gluPerspective(90.0, width / height, 0.1, 10.0)
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
+
+def main():
+    glutInit(sys.argv)
+    myInit(b"RotateTeaPotPolarView")
+    glutKeyboardFunc(myKeyboard)
+    glutIdleFunc(myIdle)
+    glutDisplayFunc(myDisplay)
+    glutMainLoop()
+
+if __name__ == "__main__":
+    main()
